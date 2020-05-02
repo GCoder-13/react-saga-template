@@ -47,6 +47,13 @@ module.exports = merge(common, {
               modules: {
                 mode: 'local',
                 localIdentName: '[hash:base64]',
+                getLocalIdent: (context, localIdentName, localName, options) => {
+                  if (context.resourcePath.includes('node_modules')) {
+                    return localName;
+                  } else {
+                    return null;
+                  }
+                },
               },
               localsConvention: 'camelCaseOnly',
               importLoaders: 1,
